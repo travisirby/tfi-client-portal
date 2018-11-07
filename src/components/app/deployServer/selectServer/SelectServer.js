@@ -37,11 +37,13 @@ class SelectServer extends Component {
         </label>
         <FormControl componentClass="select" placeholder="select" onChange={this.handleChange.bind(this)}>
           <option value="select">Select Server Type</option>
-          {this.props.servers.map((server) => {
-            return (
-              <option value={server.name} key={server.name}>{server.name}</option>
-            )
-          })}                      
+          {
+            this.props.servers.map((server) => {
+              return (
+                <option value={server.name} key={server.name}>{server.name}</option>
+              )
+            })
+          }                      
         </FormControl>
       </div>
     )

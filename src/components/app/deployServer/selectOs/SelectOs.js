@@ -19,11 +19,13 @@ class SelectOs extends Component {
         </label>
         <FormControl componentClass="select" placeholder="select">
           <option value="select">Select Server Type</option>
-          { this.props.operatingSystems.map((os) => {
-            return (
-              <option value={os.name} key={os.name}>{os.name}</option>
-            )
-          })}  
+          { 
+            this.props.operatingSystems.map((os) => {
+              return (
+                <option value={os.name} key={os.name}>{os.name}</option>
+              )
+            })
+          }  
         </FormControl>
       </div>
     )

@@ -7,6 +7,7 @@ import './DeployServer.css'
 import ServerInfo from './serverInfo/ServerInfo';
 import SelectLocation from './selectLocation/SelectLocation';
 import SelectServer from './selectServer/SelectServer';
+import SelectOs from './selectOs/SelectOs';
 
 const mapStateToProps = (state) => {
   return {
@@ -50,17 +51,7 @@ class DeployServer extends Component {
                   </Row>
                   <Row>
                     <Col xs={4} md={4} className="deployServerGridRow">
-                      <label>
-                        Operating System
-                      </label>
-                      <FormControl componentClass="select" placeholder="select">
-                        <option value="select">Select Server Type</option>
-                        {this.props.operatingSystems.map((os) => {
-                          return (
-                            <option value={os.name} key={os.name}>{os.name}</option>
-                          )
-                        })}  
-                      </FormControl>
+                      <SelectOs />
                     </Col>
                   </Row> 
                 </Grid>  
