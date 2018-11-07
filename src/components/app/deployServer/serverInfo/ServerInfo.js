@@ -20,7 +20,9 @@ class ServerInfo extends Component {
       <div>
         <Panel className="deployServerInfoPanel">
           <Panel.Heading>Hardware:</Panel.Heading>
-          <Panel.Body>x2 2.2ghz cpu 8 gig ram</Panel.Body>
+          <Panel.Body>
+            { this.props.servers[selectedServerIdx].hardware }
+          </Panel.Body>
         </Panel>
         <Panel className="deployServerInfoPanel">
           <Panel.Heading>Price:</Panel.Heading>
