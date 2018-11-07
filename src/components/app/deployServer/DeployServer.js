@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Grid, Button, Row, Col, FormControl} from 'react-bootstrap';
-import { SELECT_SERVER_TYPE } from '../../../actions/types';
 
-import ServerInfo from './serverInfo/ServerInfo'
+import './DeployServer.css'
+
+import ServerInfo from './serverInfo/ServerInfo';
+import SelectLocation from './selectLocation/SelectLocation';
+import SelectServer from './selectServer/SelectServer';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,24 +17,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  selectServerType: (serverType) => {
-    dispatch(
-      {
-        type: SELECT_SERVER_TYPE,
-        payload: serverType
-      }
-    )
-  }
-});
-
-
 class DeployServer extends Component {
-  handleChange = (event) => {
-    // send null value if placehold dropdown option selected
-    let selectedServer = event.target.value !== "select" ? event.target.value : null;
-    this.props.selectServerType(selectedServer);
-  }
   
   render() {
     return (
@@ -54,32 +40,12 @@ class DeployServer extends Component {
                   </Row>
                   <Row>
                     <Col xs={4} md={4} className="deployServerGridRow">
-                      <label>
-                        Location
-                      </label>
-                      <FormControl componentClass="select" placeholder="select">
-                        <option value="select">Select Server Type</option>
-                        {this.props.locations.map((location) => {
-                          return (
-                            <option value={location.name} key={location.name}>{location.name}</option>
-                          )
-                        })}
-                      </FormControl>
+                      <SelectLocation />
                     </Col>
                   </Row>
                   <Row>
                     <Col xs={4} md={4} className="deployServerGridRow">
-                      <label>
-                        Server Type
-                      </label>
-                      <FormControl componentClass="select" placeholder="select" onChange={this.handleChange.bind(this)}>
-                        <option value="select">Select Server Type</option>
-                        {this.props.servers.map((server) => {
-                          return (
-                            <option value={server.name} key={server.name}>{server.name}</option>
-                          )
-                        })}                      
-                      </FormControl>
+                      <SelectServer />
                     </Col>
                   </Row>
                   <Row>
@@ -99,8 +65,9 @@ class DeployServer extends Component {
                   </Row> 
                 </Grid>  
               </Col> 
-              <Col xs={4} md={6} className="deployServerInfoGridRow">
+              <Col xs={4} md={6} className="deployServerInfoGridRow">          
                 {
+                  // if selectServerType is selected show ServerInfo
                   this.props.selected.serverType && 
                   <ServerInfo />
                 }  
@@ -119,4 +86,4 @@ class DeployServer extends Component {
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(DeployServer);
+export default connect(mapStateToProps)(DeployServer);

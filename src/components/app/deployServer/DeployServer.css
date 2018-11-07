@@ -1,0 +1,19 @@
+.create-server-button-container {
+  padding-top: 5vh;
+}
+
+.deployServerGridRow {
+  font-size: calc(10px + 1vmin);
+  text-align: left;
+  color: grey;
+  padding-top: 5vh;
+}
+
+.deployServerInfoGridRow {
+  padding-top: 8vh;
+}
+
+.deployServerInfoPanel {
+  width: 60vh;
+  float: right;
+}
