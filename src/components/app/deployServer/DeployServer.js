@@ -1,14 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Grid, Button, Row, Col, FormControl, Panel} from 'react-bootstrap';
+import { Grid, Button, Row, Col, FormControl} from 'react-bootstrap';
+import { SELECT_SERVER_TYPE } from '../../../actions/types';
+
+import ServerInfo from './serverInfo/ServerInfo'
 
 const mapStateToProps = (state) => {
   return {
-    servers : state.servers
+    servers : state.servers,
+    locations : state.locations,
+    operatingSystems : state.operatingSystems,
+    selected: state.selected
   };
 };
 
+const mapDispatchToProps = dispatch => ({
+  selectServerType: (serverType) => {
+    dispatch(
+      {
+        type: SELECT_SERVER_TYPE,
+        payload: serverType
+      }
+    )
+  }
+});
+
+
 class DeployServer extends Component {
+  handleChange = (event) => {
+    // send null value if placehold dropdown option selected
+    let selectedServer = event.target.value !== "select" ? event.target.value : null;
+    this.props.selectServerType(selectedServer);
+  }
   
   render() {
     return (
@@ -26,10 +49,7 @@ class DeployServer extends Component {
                       <label>
                         HostName
                       </label>
-                      <FormControl componentClass="select" placeholder="select">
-                        <option value="select">Select Server Type</option>
-                        <option value="other">t1.xsmall.x1</option>
-                      </FormControl>
+                      <FormControl componentClass="input" placeholder="enter hostname" />
                     </Col>
                   </Row>
                   <Row>
@@ -39,9 +59,9 @@ class DeployServer extends Component {
                       </label>
                       <FormControl componentClass="select" placeholder="select">
                         <option value="select">Select Server Type</option>
-                        {this.props.servers.map((server) => {
+                        {this.props.locations.map((location) => {
                           return (
-                            <option value="select">{server.name}</option>
+                            <option value={location.name} key={location.name}>{location.name}</option>
                           )
                         })}
                       </FormControl>
@@ -52,9 +72,13 @@ class DeployServer extends Component {
                       <label>
                         Server Type
                       </label>
-                      <FormControl componentClass="select" placeholder="select">
+                      <FormControl componentClass="select" placeholder="select" onChange={this.handleChange.bind(this)}>
                         <option value="select">Select Server Type</option>
-                        <option value="other">t1.xsmall.x1</option>
+                        {this.props.servers.map((server) => {
+                          return (
+                            <option value={server.name} key={server.name}>{server.name}</option>
+                          )
+                        })}                      
                       </FormControl>
                     </Col>
                   </Row>
@@ -65,21 +89,21 @@ class DeployServer extends Component {
                       </label>
                       <FormControl componentClass="select" placeholder="select">
                         <option value="select">Select Server Type</option>
-                        <option value="other">t1.xsmall.x1</option>
+                        {this.props.operatingSystems.map((os) => {
+                          return (
+                            <option value={os.name} key={os.name}>{os.name}</option>
+                          )
+                        })}  
                       </FormControl>
                     </Col>
                   </Row> 
                 </Grid>  
-              </Col>           
+              </Col> 
               <Col xs={4} md={6} className="deployServerInfoGridRow">
-                <Panel className="deployServerInfoPanel">
-                  <Panel.Heading>Hardware:</Panel.Heading>
-                  <Panel.Body>x2 2.2ghz cpu 8 gig ram</Panel.Body>
-                </Panel>
-                <Panel className="deployServerInfoPanel">
-                  <Panel.Heading>Price:</Panel.Heading>
-                  <Panel.Body>$0.004 per hr, $45.00 per month</Panel.Body>
-                </Panel>
+                {
+                  this.props.selected.serverType && 
+                  <ServerInfo />
+                }  
               </Col>
             </Row>
             <Row>
@@ -95,4 +119,4 @@ class DeployServer extends Component {
   }
 }
 
-export default connect(mapStateToProps)(DeployServer);
+export default connect(mapStateToProps,mapDispatchToProps)(DeployServer);

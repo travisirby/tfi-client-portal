@@ -1,15 +1,8 @@
 export default function () {
-  return [{
-    "name": "Miguel",
-    "phone": "123456789",
-  },{
-    "name": "Peter",
-    "phone": "883292300348",
-  },{
-    "name": "Jessica",
-    "phone": "8743847638473",
-  },{
-    "name": "Michael",
-    "phone": "0988765553",
-  }];
+  return [
+    { "name": "m1.xlarge.x86", "price": "$0.01 per hr, $150.00 per month" },
+    { "name": "t1.large.x86", "price": "$0.05 per hr, $75.00 per month" },
+    { "name": "s1.large.x86", "price": "$0.025 per hr, $45.00 per month" },
+    { "name": "m1.medium.x86", "price": "$0.004 per hr, $25.00 per month" }
+  ];
 }

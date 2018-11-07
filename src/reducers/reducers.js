@@ -1,9 +1,15 @@
 import { combineReducers } from 'redux';
 
-import ServerReducer from './reducer_servers';
+import ServersReducer from './reducer_servers';
+import LocationsReducer from './reducer_locations';
+import OperatingSystemsReducer from './reducer_operatingsystems';
+import SelectedReducer from './reducer_selected';
 
 const rootReducer = combineReducers({
-  servers: ServerReducer
+  servers: ServersReducer,
+  locations: LocationsReducer,
+  operatingSystems: OperatingSystemsReducer,
+  selected: SelectedReducer
 });
 
 export default rootReducer;

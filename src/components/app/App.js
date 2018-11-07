@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import { Grid, Button, Row, Col, FormControl, Panel} from 'react-bootstrap';
 
 import './App.css';
 import reducers from '../../reducers/reducers';
