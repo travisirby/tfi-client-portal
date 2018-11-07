@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { Col, Panel} from 'react-bootstrap';
+import { Panel} from 'react-bootstrap';
 
 const mapStateToProps = (state) => {
   return {
@@ -14,7 +14,7 @@ class ServerInfo extends Component {
   render() {
     
     const selectedServerIdx = 
-      this.props.servers.findIndex(s => s.name == this.props.selected.serverType);
+      this.props.servers.findIndex(s => s.name === this.props.selected.serverType);
     
     return (
       <div>
